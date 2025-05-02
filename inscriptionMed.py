@@ -35,11 +35,12 @@ def add_medecin():
 
         # Connect to the database
         conn = mysql.connector.connect(
-    host='127.0.0.1',
+    host='gondola.proxy.rlwy.net',
     user='root',
-    password='istic.glsi3',
-    database='monpfe',
-    port=3306
+    password='waNRyNtpGEtXaaqQiDPCuACUAPhsFLZS
+',
+    database='railway',
+    port=22663
 )
         cursor = conn.cursor()
 
