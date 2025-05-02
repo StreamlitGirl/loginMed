@@ -20,14 +20,14 @@ def loginMed():
             return jsonify({'success':False,'msg': 'Missing email or password'})
         
         # Establish MySQL connection
-        conn = mysql.connector.connect(
-    host='127.0.0.1',
+         conn = mysql.connector.connect(
+    host='gondola.proxy.rlwy.net',
     user='root',
-    password='istic.glsi3',
-    database='monpfe',
-    port=3306
+    password='waNRyNtpGEtXaaqQiDPCuACUAPhsFLZS
+',
+    database='railway',
+    port=22663
 )
-
         cursor = conn.cursor()
         
         # Query to check if user exists and password matches
