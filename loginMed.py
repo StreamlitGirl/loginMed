@@ -8,7 +8,7 @@ CORS(app)
 
 @app.route('/loginMed', methods=['POST'])
 def loginMed():
-    conn = None
+    conn =None
     cursor = None
     try:
         data = request.get_json()
@@ -17,16 +17,17 @@ def loginMed():
         
         # Corrected the variable names to match with 'mail' and 'pwd'
         if not mail or not pwd:
-            return jsonify({'success': False, 'msg': 'Missing email or password'})
+            return jsonify({'success':False,'msg': 'Missing email or password'})
         
         # Establish MySQL connection
         conn = mysql.connector.connect(
-            host='mysql.railway.internal',
-            user='root',
-            password='waNRyNtpGEtXaaqQiDPCuACUAPhsFLZS',
-            database='railway',
-            port=3306
-        )
+    host='mysql.railway.internal',
+    user='root',
+    password='waNRyNtpGEtXaaqQiDPCuACUAPhsFLZS',
+    database='railway',
+    port=3306
+)
+
         cursor = conn.cursor()
         
         # Query to check if user exists and password matches
@@ -35,7 +36,7 @@ def loginMed():
         user = cursor.fetchone()
         
         if user:
-            return jsonify({'success': True ,'msg': 'Let him in'})
+            return jsonify({'success': True ,'msg': 'Let him in'}), 200
         else:
             # Check if the email exists for wrong password case
             query_mail = "SELECT * FROM docteur WHERE mail = %s"
@@ -46,7 +47,7 @@ def loginMed():
                 return jsonify({'success':False ,'msg': 'Wrong password'})
             else:
                 return jsonify({'success':False ,'msg': 'User not found'})
-    except mysql.connector.Error as err:
+    except mysql.connector.msg as err:
         return jsonify({'success':False ,'msg': str(err)}), 500
     finally:
         if cursor is not None:
