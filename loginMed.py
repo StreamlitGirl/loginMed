@@ -21,12 +21,11 @@ def loginMed():
         
         # Establish MySQL connection
          conn = mysql.connector.connect(
-    host='gondola.proxy.rlwy.net',
-    user='root',
-    password='waNRyNtpGEtXaaqQiDPCuACUAPhsFLZS
-',
-    database='railway',
-    port=22663
+            host='gondola.proxy.rlwy.net',
+            user='root',
+            password='waNRyNtpGEtXaaqQiDPCuACUAPhsFLZS',
+            database='railway',
+            port=22663
 )
         cursor = conn.cursor()
         
