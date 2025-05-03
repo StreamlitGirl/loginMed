@@ -8,7 +8,7 @@ CORS(app)
 
 @app.route('/loginMed', methods=['POST'])
 def loginMed():
-    conn =None
+    conn = None
     cursor = None
     try:
         data = request.get_json()
@@ -17,16 +17,16 @@ def loginMed():
         
         # Corrected the variable names to match with 'mail' and 'pwd'
         if not mail or not pwd:
-            return jsonify({'success':False,'msg': 'Missing email or password'})
+            return jsonify({'success': False, 'msg': 'Missing email or password'})
         
         # Establish MySQL connection
-         conn = mysql.connector.connect(
+        conn = mysql.connector.connect(
             host='gondola.proxy.rlwy.net',
             user='root',
             password='waNRyNtpGEtXaaqQiDPCuACUAPhsFLZS',
             database='railway',
             port=22663
-)
+        )
         cursor = conn.cursor()
         
         # Query to check if user exists and password matches
