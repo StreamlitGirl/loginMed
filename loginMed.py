@@ -35,7 +35,7 @@ def loginMed():
         user = cursor.fetchone()
         
         if user:
-            return jsonify({'success': True ,'msg': 'Let him in'}), 200
+            return jsonify({'success': True ,'msg': 'Let him in'})
         else:
             # Check if the email exists for wrong password case
             query_mail = "SELECT * FROM docteur WHERE mail = %s"
