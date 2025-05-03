@@ -46,7 +46,7 @@ def loginMed():
                 return jsonify({'success':False ,'msg': 'Wrong password'})
             else:
                 return jsonify({'success':False ,'msg': 'User not found'})
-    except mysql.connector.error as err:
+    except mysql.connector.Error as err:
         return jsonify({'success':False ,'msg': str(err)}), 500
     finally:
         if cursor is not None:
