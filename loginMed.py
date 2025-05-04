@@ -12,12 +12,23 @@ def loginMed():
     cursor = None
     try:
         data = request.get_json()
-        mail = data.get('mail')
+        Mail = data.get('Mail')
         pwd = data.get('pwd')
+   
         
-        # Corrected the variable names to match with 'mail' and 'pwd'
-        if not mail or not pwd:
-            return jsonify({'success':False,'msg': 'Missing email or password'})
+        # Corrected the variable names to match with 'Mail' and 'pwd'
+        if not Mail or not pwd:
+            if not Mail and  pwd :
+                return jsonify({'success':False,'msg': 'Missing email '})
+            if  Mail and not pwd :
+
+                return jsonify({'success':False,'msg': 'Missing  password'})
+            if (not Mail and not pwd):
+                return jsonify({'success':False,'msg': 'Missing email and password'})
+
+
+                
+            
         
         # Establish MySQL connection
         conn = mysql.connector.connect(
@@ -31,23 +42,25 @@ def loginMed():
         cursor = conn.cursor()
         
         # Query to check if user exists and password matches
-        query_all = "SELECT * FROM docteur WHERE mail = %s AND pwd = %s"
-        cursor.execute(query_all, (mail, pwd))
+        query_all = "SELECT * FROM docteur WHERE Mail = %s AND pwd = %s;"
+
+        cursor.execute(query_all, (Mail, pwd))
         user = cursor.fetchone()
         
         if user:
             return jsonify({'success': True ,'msg': 'Let him in'}), 200
         else:
             # Check if the email exists for wrong password case
-            query_mail = "SELECT * FROM docteur WHERE mail = %s"
-            cursor.execute(query_mail, (mail,))
+            query_mail = "SELECT * FROM docteur WHERE Mail = %s"
+            cursor.execute(query_mail, (Mail,))
             existing_user = cursor.fetchone()
             
             if existing_user:
+                print(user);
                 return jsonify({'success':False ,'msg': 'Wrong password'})
             else:
                 return jsonify({'success':False ,'msg': 'User not found'})
-    except mysql.connector.msg as err:
+    except mysql.connector.Error as err:
         return jsonify({'success':False ,'msg': str(err)}), 500
     finally:
         if cursor is not None:
