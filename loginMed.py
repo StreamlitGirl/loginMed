@@ -31,14 +31,22 @@ def loginMed():
             
         
         # Establish MySQL connection
-        conn = mysql.connector.connect(
+    conn = mysql.connector.connect(
+    host='127.0.0.1',
+    user='root',
+    password='istic.glsi3',
+    database='monpfe',
+    port=3306
+)
+       ''' 
+       conn = mysql.connector.connect(
     host='mysql.railway.internal',
     user='root',
     password='waNRyNtpGEtXaaqQiDPCuACUAPhsFLZS',
     database='railway',
     port=3306
 )
-
+'''
         cursor = conn.cursor()
         
         # Query to check if user exists and password matches
